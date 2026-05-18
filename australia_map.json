@@ -1,0 +1,87 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Australian Shark Incident Locations",
+
+  "width": 800,
+  "height": 500,
+
+  "layer": [
+
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/vega/vega/main/docs/data/world-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+
+      "mark": {
+        "type": "geoshape",
+        "fill": "#dbe9f4",
+        "stroke": "white"
+      },
+
+      "projection": {
+        "type": "mercator",
+        "center": [134, -28],
+        "scale": 700
+      }
+    },
+
+    {
+      "data": {
+        "url": "Australian_Shark_Incidents.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+
+      "mark": {
+        "type": "circle",
+        "color": "#d62828",
+        "opacity": 0.7
+      },
+
+      "encoding": {
+
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+
+        "size": {
+          "value": 50
+        },
+        
+
+        "tooltip": [
+          {
+            "field": "State",
+            "type": "nominal"
+          },
+          {
+            "field": "Victim.activity",
+            "type": "nominal"
+          },
+          {
+            "field": "Victim.injury",
+            "type": "nominal"
+          }
+        ]
+      },
+
+      "projection": {
+        "type": "mercator",
+        "center": [134, -28],
+        "scale": 700
+      }
+    }
+  ]
+}

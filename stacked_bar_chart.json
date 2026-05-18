@@ -1,0 +1,45 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Provoked vs Unprovoked Incidents",
+
+  "width": 500,
+  "height": 400,
+
+  "data": {
+    "url": "Australian_Shark_Incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+
+  "transform": [
+    {
+      "calculate": "isValid(datum['Provoked/unprovoked']) ? datum['Provoked/unprovoked'] : 'Unknown'",
+      "as": "IncidentType"
+    }
+  ],
+
+  "mark": "bar",
+
+  "encoding": {
+
+    "x": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State"
+    },
+
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Count of Records"
+    },
+
+    "color": {
+      "field": "IncidentType",
+      "type": "nominal",
+      "title": "Provoked/unprovoked"
+    }
+  }
+}

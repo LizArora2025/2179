@@ -1,0 +1,35 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Shark Size vs Injury Severity",
+
+  "data": {
+    "url": "Australian_Shark_Incidents.csv",
+    "format": {"type": "csv"}
+  },
+
+  "mark": "circle",
+
+  "encoding": {
+    "x": {
+      "field": "Shark.length.m",
+      "type": "quantitative",
+      "title": "Shark Length (m)"
+    },
+
+    "y": {
+      "field": "Injury.severity",
+      "type": "ordinal"
+    },
+
+    "size": {
+      "aggregate": "count",
+      "type": "quantitative"
+    },
+
+    "color": {
+      "field": "Shark.common.name",
+      "type": "nominal"
+    }
+  }
+}

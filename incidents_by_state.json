@@ -1,0 +1,26 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Incidents by Australian State",
+
+  "data": {
+    "url": "Australian_Shark_Incidents.csv",
+    "format": {"type": "csv"}
+  },
+
+  "mark": "bar",
+
+  "encoding": {
+    "y": {
+      "field": "State",
+      "type": "nominal",
+      "sort": "-x"
+    },
+
+    "x": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of Incidents"
+    }
+  }
+}

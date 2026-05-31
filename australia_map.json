@@ -88,7 +88,21 @@
             "type": "nominal",
             "title": "State"
           },
-          
+          {
+            "field": "Incident.year",
+            "type": "quantitative",
+            "title": "Year"
+          },
+          {
+            "field": "Victim.activity",
+            "type": "nominal",
+            "title": "Activity"
+          },
+          {
+            "field": "Victim.injury",
+            "type": "nominal",
+            "title": "Injury"
+          }
         ]
       },
 

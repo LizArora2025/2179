@@ -3,12 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Where Sharks Strike</title>
 
-    <!-- Vega Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
@@ -17,21 +15,20 @@
 
         body {
             margin: 0;
-            padding: 0;
+            background-color: #eef5f9;
             font-family: Arial, sans-serif;
-            background-color: #f4f8fb;
-            color: #1a1a1a;
+            color: #222;
         }
 
         header {
             background-color: #003049;
             color: white;
             text-align: center;
-            padding: 100px 20px;
+            padding: 70px 20px;
         }
 
         header h1 {
-            font-size: 60px;
+            font-size: 55px;
             margin-bottom: 10px;
         }
 
@@ -40,25 +37,48 @@
             color: #d9edf7;
         }
 
-        section {
-            width: 80%;
+        .container {
+            width: 75%;
             margin: auto;
-            padding: 70px 0;
+        }
+
+        section {
+            background: white;
+            margin: 40px 0;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
 
         h2 {
             color: #005f73;
-            margin-bottom: 20px;
+            margin-top: 0;
         }
 
         p {
             line-height: 1.8;
-            font-size: 18px;
         }
 
-        .chart {
-            margin-top: 40px;
-            margin-bottom: 60px;
+        .content-row {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .chart-side {
+            flex: 2;
+        }
+
+        .text-side {
+            flex: 1;
+        }
+
+        .insight {
+            background-color: #e8f4f8;
+            border-left: 5px solid #005f73;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
         }
 
         footer {
@@ -66,7 +86,6 @@
             color: white;
             text-align: center;
             padding: 40px;
-            margin-top: 50px;
         }
 
     </style>
@@ -75,182 +94,276 @@
 
 <body>
 
-    <!-- HEADER -->
+<header>
+    <h1>Where Sharks Strike</h1>
+    <h2>Understanding Shark Incidents in Australia</h2>
+</header>
 
-    <header>
-
-        <h1>Where Sharks Strike</h1>
-
-        <h2>Understanding Shark Incidents in Australia</h2>
-
-    </header>
-
-    <!-- INTRODUCTION -->
+<div class="container">
 
     <section>
 
+        <h2>Introduction</h2>
+
         <p>
-            Australia is home to some of the world’s most famous beaches and coastlines.
-            However, Australian waters are also home to several dangerous shark species.
-            This visualisation explores where, when, and why shark incidents occur across
-            Australia.
+            Australia has one of the world's longest coastlines and a strong culture
+            of swimming, surfing and ocean recreation. Although shark incidents are
+            relatively rare, they receive considerable public attention due to their
+            potential severity.
         </p>
 
         <p>
-            Using data from the Australian Shark-Incident Database, this project investigates
-            shark incident trends, geographical hotspots, environmental conditions, and
-            human behaviour associated with shark encounters.
+            Using data from the Australian Shark-Incident Database and Australian
+            Bureau of Statistics population data, this visualisation explores how
+            shark incidents have changed over time, where they occur, and the factors
+            associated with shark encounters.
         </p>
 
     </section>
-
-    <!-- SECTION 1 -->
 
     <section>
 
         <h2>Shark Incidents Over Time</h2>
 
-        <p>
-            Shark incidents in Australia have changed significantly over the years.
-            Increasing coastal populations, tourism, and ocean recreation activities
-            may contribute to more interactions between humans and sharks.
-        </p>
+        <div class="content-row">
 
-        <div id="line_chart" class="chart"></div>
+            <div class="chart-side">
+                <div id="line_chart"></div>
+            </div>
+
+            <div class="text-side">
+
+                <p>
+                    Shark incidents remained relatively low throughout the nineteenth
+                    century before increasing significantly during the late twentieth
+                    and early twenty-first centuries.
+                </p>
+
+                <p>
+                    Increased coastal populations, recreational ocean activities and
+                    improved reporting practices may all contribute to this trend.
+                </p>
+
+                <div class="insight">
+                    <strong>Key Insight:</strong>
+                    Shark incidents have generally increased over time, with the
+                    highest annual totals occurring in recent decades.
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
-
-    <!-- SECTION 2 -->
 
     <section>
 
         <h2>Which States Experience the Most Incidents?</h2>
 
-        <p>
-            Shark incidents are not evenly distributed across Australia.
-            Coastal states with strong surfing and beach cultures tend to record
-            higher numbers of incidents.
-        </p>
+        <div class="content-row">
 
-        <div id="incidents_by_state" class="chart"></div>
+            <div class="chart-side">
+                <div id="incidents_by_state"></div>
+            </div>
+
+            <div class="text-side">
+
+                <p>
+                    Shark incidents are concentrated in New South Wales, Queensland
+                    and Western Australia.
+                </p>
+
+                <p>
+                    These states possess long coastlines, active surfing communities
+                    and large coastal populations.
+                </p>
+
+                <div class="insight">
+                    <strong>Key Insight:</strong>
+                    NSW, QLD and WA account for the majority of shark incidents.
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
-
-    <!-- SECTION 3 -->
 
     <section>
 
         <h2>Where Do Shark Incidents Occur?</h2>
 
-        <p>
-            Mapping shark incidents reveals clear geographic hotspots around Australia’s
-            coastline. Areas with high beach activity and marine biodiversity often
-            experience more encounters.
-        </p>
+        <div class="content-row">
 
-        <div id="australia_map" class="chart"></div>
+            <div class="chart-side">
+                <div id="australia_map"></div>
+            </div>
+
+            <div class="text-side">
+
+                <p>
+                    The map highlights clear shark incident hotspots along Australia's
+                    eastern and western coastlines.
+                </p>
+
+                <p>
+                    Many incidents occur near heavily used recreational beaches and
+                    surfing destinations.
+                </p>
+
+                <div class="insight">
+                    <strong>Key Insight:</strong>
+                    Shark incidents are heavily concentrated near major coastal
+                    population centres.
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
-
-    <!-- SECTION 4 -->
 
     <section>
 
         <h2>When Are Incidents Most Common?</h2>
 
-        <p>
-            Shark incidents often occur during specific times of the year and at
-            particular times of the day. Understanding these temporal patterns can
-            improve public awareness and beach safety.
-        </p>
+        <div class="content-row">
 
-        <div id="heatmap_chart" class="chart"></div>
+            <div class="chart-side">
+                <div id="heatmap_chart"></div>
+            </div>
+
+            <div class="text-side">
+
+                <p>
+                    Shark incidents are not evenly distributed throughout the year
+                    or day.
+                </p>
+
+                <p>
+                    Certain periods show noticeably higher incident frequencies,
+                    suggesting links with environmental conditions and human activity.
+                </p>
+
+                <div class="insight">
+                    <strong>Key Insight:</strong>
+                    Shark incidents display clear temporal patterns rather than
+                    occurring randomly.
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
-
-    <!-- SECTION 5 -->
 
     <section>
 
-        <h2>Human Behaviour and Shark Encounters</h2>
+        <h2>Provoked vs Unprovoked Incidents</h2>
 
-        <p>
-            While many shark incidents are unprovoked, some occur when humans
-            intentionally interact with sharks through activities such as fishing
-            or handling marine animals.
-        </p>
+        <div class="content-row">
 
-        <div id="stacked_bar_chart" class="chart"></div>
+            <div class="chart-side">
+                <div id="stacked_bar_chart"></div>
+            </div>
+
+            <div class="text-side">
+
+                <p>
+                    Most incidents recorded in Australia are classified as
+                    unprovoked encounters.
+                </p>
+
+                <p>
+                    Provoked incidents typically involve fishing, handling sharks
+                    or direct interaction with marine wildlife.
+                </p>
+
+                <div class="insight">
+                    <strong>Key Insight:</strong>
+                    The majority of shark incidents are unprovoked.
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
-
-    <!-- SECTION 6 -->
 
     <section>
 
         <h2>Does Shark Size Affect Injury Severity?</h2>
 
-        <p>
-            Larger sharks are generally associated with more severe injuries.
-            However, injury outcomes also depend on factors such as species,
-            victim activity, and environmental conditions.
-        </p>
+        <div class="content-row">
 
-        <div id="bubble_chart" class="chart"></div>
+            <div class="chart-side">
+                <div id="bubble_chart"></div>
+            </div>
+
+            <div class="text-side">
+
+                <p>
+                    Larger sharks are often associated with more severe injuries,
+                    although many other factors influence incident outcomes.
+                </p>
+
+                <p>
+                    Species behaviour, victim activity and environmental conditions
+                    can all affect severity.
+                </p>
+
+                <div class="insight">
+                    <strong>Key Insight:</strong>
+                    Larger sharks tend to be linked with more severe outcomes.
+                </div>
+
+            </div>
+
+        </div>
 
     </section>
-
-    <!-- CONCLUSION -->
 
     <section>
 
         <h2>Conclusion</h2>
 
         <p>
-            Shark incidents in Australia are influenced by geography, time,
-            environmental conditions, and human behaviour. Although shark attacks
-            remain relatively rare, understanding these patterns can help Australians
-            make safer decisions when entering the ocean.
+            Shark incidents in Australia are influenced by geography, population
+            distribution, environmental conditions and human behaviour.
+        </p>
+
+        <p>
+            Although incidents have increased over time, they remain relatively
+            rare compared with the millions of people who enter Australian waters
+            each year.
         </p>
 
     </section>
 
-    <!-- FOOTER -->
+</div>
 
-    <footer>
+<footer>
 
-        <p>
-            Author: Aliza Arora
-        </p>
+    <p><strong>Author:</strong> Aliza Arora</p>
 
-        <p>
-            Data Source: Australian Shark-Incident Database and Australian Bureau of Statistics
+    <p>
+        Data Sources:
+        Australian Shark-Incident Database (ASID) and
+        Australian Bureau of Statistics (ABS)
+    </p>
 
-            1. Australian Shark-Incident Database: https://zenodo.org/records/18752301
-            2. Australian Bureau of Statistics: https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/sep-2025
-        </p>
+</footer>
 
+<script>
 
-    </footer>
+    vegaEmbed("#line_chart", "line_chart.json");
+    vegaEmbed("#incidents_by_state", "incidents_by_state.json");
+    vegaEmbed("#australia_map", "australia_map.json");
+    vegaEmbed("#heatmap_chart", "heatmap_chart.json");
+    vegaEmbed("#stacked_bar_chart", "stacked_bar_chart.json");
+    vegaEmbed("#bubble_chart", "bubble_chart.json");
 
-    <!-- VEGA EMBEDS -->
-
-    <script>
-
-        vegaEmbed("#line_chart", "line_chart.json");
-
-        vegaEmbed("#incidents_by_state", "incidents_by_state.json");
-
-        vegaEmbed("#australia_map", "australia_map.json");
-
-        vegaEmbed("#heatmap_chart", "heatmap_chart.json");
-
-        vegaEmbed("#stacked_bar_chart", "stacked_bar_chart.json");
-
-        vegaEmbed("#bubble_chart", "bubble_chart.json");
-
-    </script>
+</script>
 
 </body>
-
 </html>

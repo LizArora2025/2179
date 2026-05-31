@@ -1,13 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "title": "Shark Size vs Injury Severity",
+  "title": "Shark Incidents per Million Residents by State",
 
   "width": 650,
-  "height": 400,
+  "height": 350,
 
   "data": {
-    "url": "Australian_Shark_Incidents.csv",
+    "url": "Australian_Shark_Incidents_Merged.csv",
     "format": {
       "type": "csv"
     }
@@ -15,52 +15,66 @@
 
   "transform": [
     {
-      "filter": "datum['Shark.length.m'] != null && datum['Victim.injury'] != null"
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "Incidents"
+        },
+        {
+          "op": "max",
+          "field": "Population_2025_000",
+          "as": "Population"
+        }
+      ],
+      "groupby": ["State"]
     },
+
     {
-      "calculate":
-        "datum['Shark.length.m'] < 2 ? '<2m' : datum['Shark.length.m'] < 4 ? '2-4m' : datum['Shark.length.m'] < 6 ? '4-6m' : '6m+'",
-      "as": "SizeGroup"
+      "calculate": "(datum.Incidents / datum.Population) * 1000000",
+      "as": "IncidentsPerMillion"
     }
   ],
 
-  "mark": "bar",
+  "mark": {
+    "type": "bar",
+    "color": "#005f73"
+  },
 
   "encoding": {
 
-    "x": {
-      "field": "SizeGroup",
-      "type": "ordinal",
-      "title": "Shark Length Group"
-    },
-
     "y": {
-      "aggregate": "count",
-      "type": "quantitative",
-      "title": "Number of Incidents"
+      "field": "State",
+      "type": "nominal",
+      "sort": "-x",
+      "title": "State"
     },
 
-    "color": {
-      "field": "Victim.injury",
-      "type": "nominal",
-      "title": "Injury Severity"
+    "x": {
+      "field": "IncidentsPerMillion",
+      "type": "quantitative",
+      "title": "Shark Incidents per Million Residents"
     },
 
     "tooltip": [
       {
-        "field": "SizeGroup",
-        "type": "nominal",
-        "title": "Shark Length"
+        "field": "State",
+        "type": "nominal"
       },
       {
-        "field": "Victim.injury",
-        "type": "nominal",
-        "title": "Injury"
-      },
-      {
-        "aggregate": "count",
+        "field": "Population",
         "type": "quantitative",
-        "title": "Incidents"
+        "title": "Population"
+      },
+      {
+        "field": "Incidents",
+        "type": "quantitative",
+        "title": "Total Incidents"
+      },
+      {
+        "field": "IncidentsPerMillion",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Incidents per Million"
       }
     ]
   }

@@ -40,7 +40,7 @@
 
       "mark": {
         "type": "circle",
-        "color": "#d62828",
+        "color": "#4ea8de",
         "opacity": 0.7
       },
 
@@ -64,14 +64,6 @@
         "tooltip": [
           {
             "field": "State",
-            "type": "nominal"
-          },
-          {
-            "field": "Victim.activity",
-            "type": "nominal"
-          },
-          {
-            "field": "Victim.injury",
             "type": "nominal"
           }
         ]

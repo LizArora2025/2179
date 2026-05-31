@@ -3,8 +3,8 @@
 
   "title": "Australian Shark Incident Locations",
 
-  "width": 1000,
-  "height": 650,
+  "width": 650,
+  "height": 420,
 
   "layer": [
 
@@ -51,7 +51,7 @@
 
       "mark": {
         "type": "circle",
-        "opacity": 0.7
+        "opacity": 0.75
       },
 
       "encoding": {
@@ -69,17 +69,17 @@
         "size": {
           "condition": {
             "param": "hover",
-            "value": 180
+            "value": 120
           },
-          "value": 70
+          "value": 45
         },
 
         "color": {
           "condition": {
             "param": "hover",
-            "value": "#8b0000"
+            "value": "#005f73"
           },
-          "value": "#d62828"
+          "value": "#4ea8de"
         },
 
         "tooltip": [
@@ -87,21 +87,6 @@
             "field": "State",
             "type": "nominal",
             "title": "State"
-          },
-          {
-            "field": "Incident.year",
-            "type": "quantitative",
-            "title": "Year"
-          },
-          {
-            "field": "Victim.activity",
-            "type": "nominal",
-            "title": "Activity"
-          },
-          {
-            "field": "Victim.injury",
-            "type": "nominal",
-            "title": "Injury"
           }
         ]
       },

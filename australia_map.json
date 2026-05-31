@@ -1,101 +1,82 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "Australian_Shark_Incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
 
-  "title": "Australian Shark Incident Locations",
-
-  "width": 750,
-  "height": 450,
-
-  "layer": [
-
+  "params": [
     {
-      "data": {
-        "url": "https://raw.githubusercontent.com/vega/vega/main/docs/data/world-110m.json",
-        "format": {
-          "type": "topojson",
-          "feature": "countries"
-        }
-      },
-
-      "mark": {
-        "type": "geoshape",
-        "fill": "#dbe9f4",
-        "stroke": "white"
-      },
-
-      "projection": {
-        "type": "mercator",
-        "center": [134, -28],
-        "scale": 700
-      }
-    },
-
-    {
-      "data": {
-        "url": "Australian_Shark_Incidents.csv",
-        "format": {
-          "type": "csv"
-        }
-      },
-
-      "params": [
-        {
-          "name": "hover",
-          "select": {
-            "type": "point",
-            "on": "mouseover",
-            "clear": "mouseout"
-          }
-        }
-      ],
-
-      "mark": {
-        "type": "circle",
-        "opacity": 0.7
-      },
-
-      "encoding": {
-
-        "longitude": {
-          "field": "Longitude",
-          "type": "quantitative"
-        },
-
-        "latitude": {
-          "field": "Latitude",
-          "type": "quantitative"
-        },
-
-        "size": {
-          "condition": {
-            "param": "hover",
-            "value": 120
-          },
-          "value": 45
-        },
-
-        "color": {
-          "condition": {
-            "param": "hover",
-            "value": "#005f73"
-          },
-          "value": "#4ea8de"
-        },
-
-        "tooltip": [
-          {
-            "field": "State",
-            "type": "nominal",
-            "title": "State"
-          }
-        ]
-      },
-
-      "projection": {
-        "type": "mercator",
-        "center": [134, -28],
-        "scale": 700
+      "name": "hover",
+      "select": {
+        "type": "point",
+        "on": "mouseover",
+        "clear": "mouseout"
       }
     }
-  ]
+  ],
+
+  "mark": {
+    "type": "circle",
+    "opacity": 0.7
+  },
+
+  "encoding": {
+
+    "longitude": {
+      "field": "Longitude",
+      "type": "quantitative"
+    },
+
+    "latitude": {
+      "field": "Latitude",
+      "type": "quantitative"
+    },
+
+    "size": {
+      "condition": {
+        "param": "hover",
+        "value": 180
+      },
+      "value": 70
+    },
+
+    "color": {
+      "condition": {
+        "param": "hover",
+        "value": "#8b0000"
+      },
+      "value": "#d62828"
+    },
+
+    "tooltip": [
+      {
+        "field": "State",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "Incident.year",
+        "type": "quantitative",
+        "title": "Year"
+      },
+      {
+        "field": "Victim.activity",
+        "type": "nominal",
+        "title": "Activity"
+      },
+      {
+        "field": "Victim.injury",
+        "type": "nominal",
+        "title": "Injury"
+      }
+    ]
+  },
+
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28],
+    "scale": 700
+  }
 }

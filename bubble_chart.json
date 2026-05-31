@@ -1,13 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "title": "Shark Incidents per Million Residents by State",
+  "title": "Shark Incidents by State and Month",
 
   "width": 650,
-  "height": 350,
+  "height": 300,
 
   "data": {
-    "url": "Australian_Shark_Incidents_Merged.csv",
+    "url": "Australian_Shark_Incidents.csv",
     "format": {
       "type": "csv"
     }
@@ -15,67 +15,55 @@
 
   "transform": [
     {
-      "aggregate": [
-        {
-          "op": "count",
-          "as": "Incidents"
-        },
-        {
-          "op": "max",
-          "field": "Population_2025_000",
-          "as": "Population"
-        }
-      ],
-      "groupby": ["StateName"]
+      "calculate": "toNumber(datum['Incident.month'])",
+      "as": "Month"
     },
-
     {
-      "calculate": "toNumber(datum.Population)",
-      "as": "PopulationNum"
-    },
-
-    {
-      "calculate": "(datum.Incidents / datum.PopulationNum) * 1000",
-      "as": "IncidentsPerMillion"
+      "filter": "datum.Month >= 1 && datum.Month <= 12"
     }
   ],
 
   "mark": {
-    "type": "bar",
-    "color": "#005f73"
+    "type": "rect"
   },
 
   "encoding": {
+
+    "x": {
+      "field": "Month",
+      "type": "ordinal",
+      "title": "Month",
+      "sort": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+
     "y": {
-      "field": "StateName",
+      "field": "State",
       "type": "nominal",
-      "sort": "-x",
       "title": "State"
     },
 
-    "x": {
-      "field": "IncidentsPerMillion",
+    "color": {
+      "aggregate": "count",
       "type": "quantitative",
-      "title": "Shark Incidents per Million Residents"
+      "title": "Number of Incidents",
+      "scale": {
+        "scheme": "blues"
+      }
     },
 
     "tooltip": [
       {
-        "field": "StateName",
-        "title": "State"
+        "field": "State",
+        "type": "nominal"
       },
       {
-        "field": "PopulationNum",
-        "title": "Population (000s)"
+        "field": "Month",
+        "type": "ordinal"
       },
       {
-        "field": "Incidents",
-        "title": "Total Incidents"
-      },
-      {
-        "field": "IncidentsPerMillion",
-        "format": ".2f",
-        "title": "Incidents per Million"
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Incidents"
       }
     ]
   }

@@ -59,12 +59,12 @@
         "size": {
           "value": 50
         },
-        
 
         "tooltip": [
           {
             "field": "State",
-            "type": "nominal"
+            "type": "nominal",
+            "title": "State"
           }
         ]
       },

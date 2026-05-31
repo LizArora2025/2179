@@ -3,32 +3,73 @@
 
   "title": "Incidents by Australian State",
 
-  "autosize": {
-  "type": "fit",
-  "contains": "padding"
-},
-  
-  "width": 650,
+  "width": 700,
   "height": 350,
 
   "data": {
     "url": "Australian_Shark_Incidents.csv",
-    "format": {"type": "csv"}
+    "format": {
+      "type": "csv"
+    }
   },
 
-  "mark": "bar",
+  "params": [
+    {
+      "name": "highlight",
+      "select": {
+        "type": "point",
+        "on": "mouseover",
+        "clear": "mouseout"
+      }
+    }
+  ],
+
+  "mark": {
+    "type": "bar"
+  },
 
   "encoding": {
+
     "y": {
       "field": "State",
       "type": "nominal",
-      "sort": "-x"
+      "sort": "-x",
+      "title": "State"
     },
 
     "x": {
       "aggregate": "count",
       "type": "quantitative",
       "title": "Number of Incidents"
-    }
+    },
+
+    "color": {
+      "condition": {
+        "param": "highlight",
+        "value": "#d62828"
+      },
+      "value": "#7aa6c2"
+    },
+
+    "opacity": {
+      "condition": {
+        "param": "highlight",
+        "value": 1
+      },
+      "value": 0.6
+    },
+
+    "tooltip": [
+      {
+        "field": "State",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Number of Incidents"
+      }
+    ]
   }
 }

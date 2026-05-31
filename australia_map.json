@@ -40,7 +40,7 @@
 
       "mark": {
         "type": "circle",
-        "color": "#4ea8de",
+        "color": "blue",
         "opacity": 0.7
       },
 

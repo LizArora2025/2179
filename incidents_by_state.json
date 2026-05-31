@@ -3,6 +3,9 @@
 
   "title": "Incidents by Australian State",
 
+  "width": 650,
+  "height": 350,
+
   "data": {
     "url": "Australian_Shark_Incidents.csv",
     "format": {"type": "csv"}

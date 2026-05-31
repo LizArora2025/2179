@@ -77,9 +77,9 @@
         "color": {
           "condition": {
             "param": "hover",
-            "value": "#8b0000"
+            "value": "#005f73"
           },
-          "value": "#d62828"
+          "value": "#4ea8de"
         },
 
         "tooltip": [
@@ -87,16 +87,6 @@
             "field": "State",
             "type": "nominal",
             "title": "State"
-          },
-          {
-            "field": "Incident.year",
-            "type": "quantitative",
-            "title": "Year"
-          },
-          {
-            "field": "Victim.activity",
-            "type": "nominal",
-            "title": "Activity"
           },
           {
             "field": "Victim.injury",

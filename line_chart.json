@@ -25,18 +25,22 @@
 
   "mark": {
     "type": "line",
-    "point": true
+    "point": {
+      "filled": true,
+      "size": 60
+    }
   },
 
   "encoding": {
+
     "x": {
       "field": "Year",
       "type": "quantitative",
       "title": "Year",
       "axis": {
-    "format": "d"
-  }
-},
+        "format": "d"
+      }
+    },
 
     "y": {
       "aggregate": "count",
@@ -47,7 +51,14 @@
     "tooltip": [
       {
         "field": "Year",
-        "type": "quantitative"
+        "type": "quantitative",
+        "title": "Year",
+        "format": ".0f"
+      },
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Number of Incidents"
       }
     ]
   }

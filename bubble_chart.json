@@ -26,11 +26,16 @@
           "as": "Population"
         }
       ],
-      "groupby": ["State"]
+      "groupby": ["StateName"]
     },
 
     {
-      "calculate": "(datum.Incidents / datum.Population) * 1000000",
+      "calculate": "toNumber(datum.Population)",
+      "as": "PopulationNum"
+    },
+
+    {
+      "calculate": "(datum.Incidents / datum.PopulationNum) * 1000",
       "as": "IncidentsPerMillion"
     }
   ],
@@ -41,9 +46,8 @@
   },
 
   "encoding": {
-
     "y": {
-      "field": "State",
+      "field": "StateName",
       "type": "nominal",
       "sort": "-x",
       "title": "State"
@@ -57,22 +61,19 @@
 
     "tooltip": [
       {
-        "field": "State",
-        "type": "nominal"
+        "field": "StateName",
+        "title": "State"
       },
       {
-        "field": "Population",
-        "type": "quantitative",
-        "title": "Population"
+        "field": "PopulationNum",
+        "title": "Population (000s)"
       },
       {
         "field": "Incidents",
-        "type": "quantitative",
         "title": "Total Incidents"
       },
       {
         "field": "IncidentsPerMillion",
-        "type": "quantitative",
         "format": ".2f",
         "title": "Incidents per Million"
       }

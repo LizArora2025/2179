@@ -15,7 +15,7 @@
 
   "transform": [
     {
-      "calculate": "isValid(datum['Provoked/unprovoked']) ? datum['Provoked/unprovoked'] : 'Unknown'",
+      "calculate": "(datum['Provoked/unprovoked'] == null || datum['Provoked/unprovoked'] == '') ? 'unknown' : datum['Provoked/unprovoked']",
       "as": "IncidentType"
     }
   ],
@@ -39,7 +39,36 @@
     "color": {
       "field": "IncidentType",
       "type": "nominal",
-      "title": "Provoked/unprovoked"
-    }
+      "title": "Provoked/unprovoked",
+      "scale": {
+        "domain": [
+          "provoked",
+          "unprovoked",
+          "unknown"
+        ],
+        "range": [
+          "#f58518",
+          "#e45756",
+          "#4c78a8"
+        ]
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "State",
+        "type": "nominal"
+      },
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Incidents"
+      },
+      {
+        "field": "IncidentType",
+        "type": "nominal",
+        "title": "Type"
+      }
+    ]
   }
 }

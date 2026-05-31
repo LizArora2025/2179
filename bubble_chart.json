@@ -3,33 +3,65 @@
 
   "title": "Shark Size vs Injury Severity",
 
+  "width": 650,
+  "height": 400,
+
   "data": {
     "url": "Australian_Shark_Incidents.csv",
-    "format": {"type": "csv"}
+    "format": {
+      "type": "csv"
+    }
   },
 
-  "mark": "circle",
+  "transform": [
+    {
+      "filter": "datum['Shark.length.m'] != null && datum['Victim.injury'] != null"
+    },
+    {
+      "calculate":
+        "datum['Shark.length.m'] < 2 ? '<2m' : datum['Shark.length.m'] < 4 ? '2-4m' : datum['Shark.length.m'] < 6 ? '4-6m' : '6m+'",
+      "as": "SizeGroup"
+    }
+  ],
+
+  "mark": "bar",
 
   "encoding": {
+
     "x": {
-      "field": "Shark.length.m",
-      "type": "quantitative",
-      "title": "Shark Length (m)"
+      "field": "SizeGroup",
+      "type": "ordinal",
+      "title": "Shark Length Group"
     },
 
     "y": {
-      "field": "Injury.severity",
-      "type": "ordinal"
-    },
-
-    "size": {
       "aggregate": "count",
-      "type": "quantitative"
+      "type": "quantitative",
+      "title": "Number of Incidents"
     },
 
     "color": {
-      "field": "Shark.common.name",
-      "type": "nominal"
-    }
+      "field": "Victim.injury",
+      "type": "nominal",
+      "title": "Injury Severity"
+    },
+
+    "tooltip": [
+      {
+        "field": "SizeGroup",
+        "type": "nominal",
+        "title": "Shark Length"
+      },
+      {
+        "field": "Victim.injury",
+        "type": "nominal",
+        "title": "Injury"
+      },
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Incidents"
+      }
+    ]
   }
 }

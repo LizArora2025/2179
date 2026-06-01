@@ -1,0 +1,65 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Fatal vs Non-Fatal Shark Incidents by State",
+
+  "width": 600,
+  "height": 350,
+
+  "data": {
+    "url": "Australian_Shark_Incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+
+  "transform": [
+    {
+      "calculate": "indexof(lower(datum['Victim.injury']), 'fatal') >= 0 ? 'Fatal' : 'Non-Fatal'",
+      "as": "InjuryType"
+    }
+  ],
+
+  "mark": "bar",
+
+  "encoding": {
+    "x": {
+      "field": "State",
+      "type": "nominal",
+      "title": "State"
+    },
+
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of Incidents"
+    },
+
+    "color": {
+      "field": "InjuryType",
+      "type": "nominal",
+      "title": "Outcome",
+      "scale": {
+        "domain": ["Fatal", "Non-Fatal"],
+        "range": ["#d62828", "#4ea8de"]
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "State",
+        "type": "nominal"
+      },
+      {
+        "field": "InjuryType",
+        "type": "nominal",
+        "title": "Outcome"
+      },
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Incidents"
+      }
+    ]
+  }
+}

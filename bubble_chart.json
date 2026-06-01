@@ -14,10 +14,7 @@
   },
 
   "transform": [
-  {
-    "calculate": "datum.State == 'Qld' ? 'QLD' : datum.State"
-    "as": "StateFixed"
-  },
+
   {
     "calculate": "toNumber(datum['Incident.month'])",
     "as": "Month"
@@ -42,9 +39,10 @@
     },
 
     "y": {
-      "field": "StateFixed",
+      "field": "State",
       "type": "nominal",
       "title": "State"
+      "sort": ["NSW", "QLD", "VIC", "WA", "SA", "TAS", "NT"]
     },
 
     "color": {
@@ -58,7 +56,7 @@
 
     "tooltip": [
       {
-        "field": "StateFixed",
+        "field": "State",
         "type": "nominal"
       },
       {

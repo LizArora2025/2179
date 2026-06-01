@@ -1,0 +1,82 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Top 10 Locations for Shark Incidents",
+
+  "width": 600,
+  "height": 350,
+
+  "data": {
+    "url": "Australian_Shark_Incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+
+  "transform": [
+    {
+      "filter": "datum.Location != null && datum.Location != ''"
+    },
+
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "Incidents"
+        }
+      ],
+      "groupby": ["Location"]
+    },
+
+    {
+      "window": [
+        {
+          "op": "rank",
+          "as": "rank"
+        }
+      ],
+      "sort": [
+        {
+          "field": "Incidents",
+          "order": "descending"
+        }
+      ]
+    },
+
+    {
+      "filter": "datum.rank <= 10"
+    }
+  ],
+
+  "mark": {
+    "type": "bar",
+    "color": "#4ea8de"
+  },
+
+  "encoding": {
+
+    "y": {
+      "field": "Location",
+      "type": "nominal",
+      "sort": "-x",
+      "title": "Location"
+    },
+
+    "x": {
+      "field": "Incidents",
+      "type": "quantitative",
+      "title": "Number of Incidents"
+    },
+
+    "tooltip": [
+      {
+        "field": "Location",
+        "type": "nominal"
+      },
+      {
+        "field": "Incidents",
+        "type": "quantitative"
+      }
+    ]
+  }
+}

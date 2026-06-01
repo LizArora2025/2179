@@ -3,7 +3,7 @@
 
   "title": "Shark Incidents by State and Month",
 
-  "width": 500,
+  "width": 650,
   "height": 300,
 
   "data": {
@@ -14,16 +14,14 @@
   },
 
   "transform": [
-
-  {
-    "calculate": "toNumber(datum['Incident.month'])",
-    "as": "Month"
-  },
-  {
-    "filter": "datum.Month >= 1 && datum.Month <= 12"
-  }
-]
-   
+    {
+      "calculate": "toNumber(datum['Incident.month'])",
+      "as": "Month"
+    },
+    {
+      "filter": "datum.Month >= 1 && datum.Month <= 12"
+    }
+  ],
 
   "mark": {
     "type": "rect"
@@ -42,7 +40,6 @@
       "field": "State",
       "type": "nominal",
       "title": "State"
-      "sort": ["NSW", "QLD", "VIC", "WA", "SA", "TAS", "NT"]
     },
 
     "color": {

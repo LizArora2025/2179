@@ -15,7 +15,7 @@
 
   "transform": [
   {
-    "calculate": "datum.State == 'Qld' ? 'QLD' : datum.State",
+    "calculate": "upper(trim(datum.State))",
     "as": "StateFixed"
   },
   {

@@ -1,6 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
+  "title": "Injury Outcomes by Incident Type",
+
+  "width": 500,
+  "height": 350,
+
   "data": {
     "url": "Australian_Shark_Incidents.csv",
     "format": {
@@ -11,18 +16,42 @@
   "mark": "bar",
 
   "encoding": {
-    "x": {
-      "field": "State",
-      "type": "nominal"
-    },
 
-    "color": {
-      "field": "Victim.gender",
-      "type": "nominal"
+    "x": {
+      "field": "Provoked/unprovoked",
+      "type": "nominal",
+      "title": "Incident Type"
     },
 
     "y": {
-      "aggregate": "count"
-    }
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of Incidents"
+    },
+
+    "color": {
+      "field": "Victim.injury",
+      "type": "nominal",
+      "title": "Outcome",
+      "scale": {
+        "domain": ["fatal", "injured"],
+        "range": ["#d62828", "#5b9bd5"]
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Provoked/unprovoked",
+        "title": "Incident Type"
+      },
+      {
+        "field": "Victim.injury",
+        "title": "Outcome"
+      },
+      {
+        "aggregate": "count",
+        "title": "Incidents"
+      }
+    ]
   }
 }

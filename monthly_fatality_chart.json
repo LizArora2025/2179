@@ -13,12 +13,22 @@
     }
   },
 
+  "transform": [
+    {
+      "calculate": "datum['Incident.month']",
+      "as": "Month"
+    },
+    {
+      "calculate": "datum['Victim.injury']",
+      "as": "Outcome"
+    }
+  ],
+
   "mark": "bar",
 
   "encoding": {
-
     "x": {
-      "field": "Incident.month",
+      "field": "Month",
       "type": "ordinal",
       "title": "Month"
     },
@@ -30,13 +40,28 @@
     },
 
     "color": {
-      "field": "Victim.injury",
+      "field": "Outcome",
       "type": "nominal",
       "title": "Outcome",
       "scale": {
         "domain": ["fatal", "injured"],
         "range": ["#d62828", "#5b9bd5"]
       }
-    }
+    },
+
+    "tooltip": [
+      {
+        "field": "Month",
+        "title": "Month"
+      },
+      {
+        "field": "Outcome",
+        "title": "Outcome"
+      },
+      {
+        "aggregate": "count",
+        "title": "Incidents"
+      }
+    ]
   }
 }

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Shark Incidents by Decade",
+
+  "width": 600,
+  "height": 350,
+
+  "data": {
+    "url": "Australian_Shark_Incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+
+  "transform": [
+    {
+      "calculate": "toNumber(datum['Incident.year'])",
+      "as": "Year"
+    },
+
+    {
+      "filter": "datum.Year != null"
+    },
+
+    {
+      "calculate": "floor(datum.Year / 10) * 10",
+      "as": "Decade"
+    }
+  ],
+
+  "mark": {
+    "type": "bar",
+    "color": "#4ea8de"
+  },
+
+  "encoding": {
+
+    "x": {
+      "field": "Decade",
+      "type": "ordinal",
+      "title": "Decade"
+    },
+
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of Incidents"
+    },
+
+    "tooltip": [
+      {
+        "field": "Decade",
+        "type": "ordinal"
+      },
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Incidents"
+      }
+    ]
+  }
+}

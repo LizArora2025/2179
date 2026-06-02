@@ -442,6 +442,43 @@
 
 </section>
 
+<section class="heatmap-section">
+
+    <h2>How Do Injury Outcomes Vary Throughout the Year?</h2>
+
+    <div class="content-row">
+
+        <div class="chart-side">
+            <div id="monthly_fatality_chart"></div>
+        </div>
+
+        <div class="text-side">
+
+            <p>
+                This interactive chart allows users to explore fatal and non-fatal
+                shark incidents across different states and months. Selecting a
+                state from the dropdown updates the chart to display only incidents
+                recorded in that state.
+            </p>
+
+            <p>
+                Comparing monthly patterns helps identify whether severe incidents
+                occur more frequently during particular times of the year and
+                whether seasonal trends differ between states.
+            </p>
+
+            <div class="insight">
+                <strong>Key Insight:</strong>
+                While injured victims account for most shark incidents, the timing
+                and frequency of fatal incidents varies across states and seasons.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
     <section>
 
         <h2>Conclusion</h2>
@@ -484,6 +521,7 @@
     vegaEmbed("#fatality_chart", "fatan injured stacked bar chart.json");
     vegaEmbed("#location_chart", "Location horizontal bar chart.json");
     vegaEmbed("#decade_chart", "decade_chart.json");
+    vegaEmbed("#monthly_fatality_chart", "monthly_fatality_chart.json");
 
 </script>
 

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Fatal vs Injured Shark Incidents by Month",
+
+  "width": 600,
+  "height": 350,
+
+  "data": {
+    "url": "Australian_Shark_Incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+
+  "params": [
+    {
+      "name": "StateSelect",
+      "value": "NSW",
+      "bind": {
+        "input": "select",
+        "options": ["NSW", "QLD", "VIC", "WA", "SA", "TAS", "NT"],
+        "name": "Select State: "
+      }
+    }
+  ],
+
+  "transform": [
+    {
+      "calculate": "toNumber(datum['Incident.month'])",
+      "as": "Month"
+    },
+    {
+      "filter": "datum.State == StateSelect"
+    }
+  ],
+
+  "mark": "bar",
+
+  "encoding": {
+    "x": {
+      "field": "Month",
+      "type": "ordinal",
+      "title": "Month",
+      "sort": [1,2,3,4,5,6,7,8,9,10,11,12]
+    },
+
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of Incidents"
+    },
+
+    "color": {
+      "field": "Victim.injury",
+      "type": "nominal",
+      "title": "Outcome",
+      "scale": {
+        "domain": ["fatal", "injured"],
+        "range": ["#d62828", "#4ea8de"]
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "State",
+        "type": "nominal"
+      },
+      {
+        "field": "Month",
+        "type": "ordinal"
+      },
+      {
+        "field": "Victim.injury",
+        "type": "nominal"
+      },
+      {
+        "aggregate": "count",
+        "title": "Incidents"
+      }
+    ]
+  }
+}

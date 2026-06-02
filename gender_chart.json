@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": "Shark Incidents by Victim Gender",
+
+  "width": 600,
+  "height": 350,
+
+  "data": {
+    "url": "Australian_Shark_Incidents.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+
+  "transform": [
+    {
+      "filter": "datum['Victim.gender'] != null && datum['Victim.gender'] != ''"
+    }
+  ],
+
+  "mark": {
+    "type": "bar",
+    "color": "#5b9bd5"
+  },
+
+  "encoding": {
+
+    "x": {
+      "field": "Victim.gender",
+      "type": "nominal",
+      "title": "Gender"
+    },
+
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of Incidents"
+    },
+
+    "tooltip": [
+      {
+        "field": "Victim.gender",
+        "type": "nominal",
+        "title": "Gender"
+      },
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Number of Incidents"
+      }
+    ]
+  }
+}

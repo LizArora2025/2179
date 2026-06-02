@@ -1,9 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
 
-  "title": "Injury Outcomes by Incident Type",
+  "title": "Shark Incidents per 100,000 Population by State",
 
-  "width": 500,
+  "width": 700,
   "height": 350,
 
   "data": {
@@ -13,44 +13,65 @@
     }
   },
 
-  "mark": "bar",
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "count",
+          "as": "Incidents"
+        },
+        {
+          "op": "max",
+          "field": "Population_2025_000",
+          "as": "Population"
+        }
+      ],
+      "groupby": ["StateName"]
+    },
+
+    {
+      "calculate": "(datum.Incidents / (datum.Population * 1000)) * 100000",
+      "as": "IncidentsPer100k"
+    }
+  ],
+
+  "mark": {
+    "type": "bar",
+    "color": "#5b9bd5"
+  },
 
   "encoding": {
 
-    "x": {
-      "field": "Provoked/unprovoked",
-      "type": "nominal",
-      "title": "Incident Type"
-    },
-
     "y": {
-      "aggregate": "count",
-      "type": "quantitative",
-      "title": "Number of Incidents"
+      "field": "StateName",
+      "type": "nominal",
+      "sort": "-x",
+      "title": "State"
     },
 
-    "color": {
-      "field": "Victim.injury",
-      "type": "nominal",
-      "title": "Outcome",
-      "scale": {
-        "domain": ["fatal", "injured"],
-        "range": ["#d62828", "#5b9bd5"]
-      }
+    "x": {
+      "field": "IncidentsPer100k",
+      "type": "quantitative",
+      "title": "Incidents per 100,000 Population"
     },
 
     "tooltip": [
       {
-        "field": "Provoked/unprovoked",
-        "title": "Incident Type"
+        "field": "StateName",
+        "title": "State"
       },
       {
-        "field": "Victim.injury",
-        "title": "Outcome"
+        "field": "Incidents",
+        "title": "Total Incidents"
       },
       {
-        "aggregate": "count",
-        "title": "Incidents"
+        "field": "Population",
+        "title": "Population (000s)"
+      },
+      {
+        "field": "IncidentsPer100k",
+        "format": ".2f",
+        "title": "Incidents per 100k"
       }
     ]
   }
